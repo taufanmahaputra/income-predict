@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Capitalist</title>
+	<link rel="shortcut icon" type="image/x-icon" href="https://files.owlgaming.net/Logo/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="https://bootswatch.com/3/paper/bootstrap.min.css">
+</head>
+<body style="padding-top: 60px;">
+	<div class="container">
+		<h1 class="text-center">The Capitalist</h1>
+		<h3 class="text-center">Aplikasi Web Prediksi Income Per Tahun</h3>
+		<hr>
+
+		{% from 'includes/_formhelpers.html' import render_field %}
+		{% include 'includes/_messages.html' %}
+
+		<form method="POST" action="/">
+
+			{% include 'includes/_row1.html' %} <br>
+			{% include 'includes/_row2.html' %} <br>
+			{% include 'includes/_row3.html' %} <br>
+
+			<div class="form-group">
+					<input type="submit" value="Submit" class="btn btn-primary btn-lg btn-block">
+			</div>
+		</form>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
