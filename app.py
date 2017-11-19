@@ -41,6 +41,18 @@ race_choices = [('1', 'White'), ('2', 'Asian-Pac-Islander'), ('3', 'Amer-Indian-
 
 sex_choices = [('1', 'Female'), ('2', 'Male')]
 
+native_country_choices = [('1', 'United-States'), ('2', 'Cambodia'), ('3', 'England'),
+					 ('4', 'Puerto-Rico'), ('5', 'Canada'), ('6', 'Germany'),
+					 ('7', 'Outlying-US(Guam-USVI-etc)'), ('8', 'India'), ('9', 'Japan'),
+					 ('10', 'Greece'), ('11', 'South'), ('12', 'China'),
+					 ('13', 'Cuba'), ('14', 'Iran'), ('15', 'Honduras'), ('16', 'Philippines'), ('17', 'Italy'),
+					 ('18', 'Poland'), ('19', 'Jamaica'), ('20', 'Vietnam'), ('21', 'Mexico'), ('22', 'Portugal'),
+					 ('23', 'Ireland'), ('24', 'France'), ('25', 'Dominican-Republic'), ('26', 'Laos'), ('27', 'Ecuador'),
+					 ('28', 'Taiwan'), ('29', 'Haiti'), ('30', 'Columbia'), ('31', 'Hungary'), ('32', 'Guatemala'),
+					 ('33', 'Nicaragua'), ('34', 'Scotland'), ('35', 'Thailand'), ('36', 'Yugoslavia'), ('37', 'El-Salvador'),
+					 ('38', 'Trinadad&Tobago'), ('39', 'Peru'), ('40', 'Hong'), ('41', 'Holand-Netherlands') 
+					]
+
 class InputForm(Form):
 	age = StringField('Age')
 	workclass = SelectField('Workclass', choices = workclass_choices)
@@ -55,7 +67,7 @@ class InputForm(Form):
 	capital_gain = StringField('Capital Gain')
 	capital_loss = StringField('Capital Loss')
 	hours_per_week = StringField('Hours per Week')
-	native_country = SelectField('Native Country', choices = education_choices)
+	native_country = SelectField('Native Country', choices = native_country_choices)
 
 # routing
 @app.route('/', methods=('GET', 'POST'))
@@ -77,7 +89,7 @@ def index():
 		relationship_value = dict(relationship_choices).get(form.relationship.data)
 		race_value = dict(race_choices).get(form.race.data)
 		sex_value = dict(sex_choices).get(form.sex.data)
-		native_country_value = dict(education_choices).get(form.native_country.data)
+		native_country_value = dict(native_country_choices).get(form.native_country.data)
 
 		value = [age_value, workclass_value,fnlwgt_value, education_value,
 				education_num_value, marital_status_value, occupation_value,
