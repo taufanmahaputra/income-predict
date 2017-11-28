@@ -1,31 +1,163 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>The Capitalist</title>
-	<link rel="shortcut icon" type="image/x-icon" href="https://files.owlgaming.net/Logo/favicon.ico"/>
-	<link rel="stylesheet" type="text/css" href="https://bootswatch.com/3/paper/bootstrap.min.css">
-</head>
-<body style="padding-top: 60px;">
-	<div class="container">
-		<h1 class="text-center">The Capitalist</h1>
-		<h3 class="text-center">Aplikasi Web Prediksi Income Per Tahun</h3>
-		<hr>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>The Capitalist - Your Income Predictor</title>
+		<meta name="author" content="Taufan Mahaputra" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="https://fonts.googleapis.com/css?family=Nunito:400,700|Poppins" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/demo.css') }}" />
+		<link rel="shortcut icon" type="image/x-icon" href="https://files.owlgaming.net/Logo/favicon.ico"/>
+		<link rel="stylesheet" type="text/css" href="https://bootswatch.com/3/paper/bootstrap.min.css">
 
-		{% from 'includes/_formhelpers.html' import render_field %}
-		{% include 'includes/_messages.html' %}
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<!-- Custom Theme files -->
+		<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
+		<script>document.documentElement.className = 'js';</script>
+	</head>
+	<body class="demo-4 loading">
+		<main>
+			<div class="content content--intro">
+				<div class="content__inner">
 
-		<form method="POST" action="/">
+				{% from 'includes/_formhelpers.html' import render_field %}
+				{% include 'includes/_messages.html' %}
 
-			{% include 'includes/_row1.html' %} <br>
-			{% include 'includes/_row2.html' %} <br>
-			{% include 'includes/_row3.html' %} <br>
+					<h2 class="content__title">The Capitalist</h2>
+					<h3 class="content__subtitle">Aplikasi Web Prediksi Income Per Tahun</h3>
+					<a href="#" class="enter">Let's get started!</a>
+				</div>
+				<div class="shape-wrap">
+					<svg class="shape" width="100%" height="100vh" preserveAspectRatio="none" viewBox="0 0 1440 800" xmlns:pathdata="http://www.codrops.com/">
+						<path d="M -30.45,-43.86 -30.45,0 53.8,0 53.8,0 179.5,0 179.5,0 193.3,0 193.3,0 253.1,0 253.1,0 276.1,0 276.1,0 320.6,0 320.6,0 406.5,0 406.5,0 435.6,0 435.6,0 477,0 477,0 527.6,0 527.6,0 553.7,0 553.7,0 592,0 592,0 742.3,0 742.3,0 762.2,0 762.2,0 776,0 776,0 791.3,0 791.3,0 852.7,0 852.7,0 871.1,0 871.1,0 878.7,0 878.7,0 891,0 891,0 923.2,0 923.2,0 940.1,0 940.1,0 976.9,0 976.9,0 1031,0 1031,0 1041,0 1041,0 1176,0 1176,0 1192,0 1192,0 1210,0 1210,0 1225,0 1225,0 1236,0 1236,0 1248,0 1248,0 1273,0 1273,0 1291,0 1291,0 1316,0 1316,0 1337,0 1337,0 1356,0 1356,0 1414,0 1414,0 1432,0 1432,0 1486,0 1486,-43.86 Z" pathdata:id="M -30.45,-57.86 -30.45,442.6 53.8,443.8 53.8,396.3 179.5,396.3 179.5,654.7 193.3,654.7 193.3,589.1 253.1,589.1 253.1,561.6 276.1,561.6 276.1,531.2 320.6,531.2 320.6,238.6 406.5,238.6 406.5,213.9 435.6,213.9 435.6,246.2 477,246.2 477,289.9 527.6,289.9 527.6,263.3 553.7,263.3 553.7,280.4 592,280.4 592,189.2 742.3,189.2 742.3,259.5 762.2,259.5 762.2,103.7 776,103.7 776,77.11 791.3,77.11 791.3,18.21 852.7,18.21 852.7,86.61 871.1,86.61 871.1,231 878.7,240.5 878.7,320.3 891,320.3 891,434.3 923.2,434.3 923.2,145.5 940.1,145.5 940.1,117 976.9,117 976.9,139.8 1031,139.8 1031,284.2 1041,284.2 1041,242.4 1176,242.4 1176,282.3 1192,282.3 1192,641.4 1210,641.4 1210,692.7 1225,692.7 1225,599.6 1236,599.6 1236,527.4 1248,527.4 1248,500.8 1273,500.8 1273,523.6 1291,523.6 1291,652.8 1316,652.8 1316,533.1 1337,533.1 1337,502.7 1356,502.7 1356,523.6 1414,523.6 1414,491.3 1432,491.3 1432,523.6 1486,523.6 1486,-57.86 Z"></path>
+					</svg>
+				</div>
+			</div><!-- /content -->
 
-			<div class="form-group">
-					<input type="submit" value="Submit" class="btn btn-primary btn-lg btn-block">
+
+			<div class="content content--fixed">
+				<div class="content__inner">
+				<hr>
+
+					<div class="main agileits-w3layouts">
+						<div class="main-agileinfo"> 
+							<div class="wthree-box"></div>
+							<div class="agileui-forms">
+								<div class="container-info">
+									<div class="info-w3lsitem">
+										<div class="w3table">
+											<div class="w3table-cell">
+												<div class="btn"> < </div>
+											</div>
+										</div>
+									</div>
+									<div class="info-w3lsitem">
+										<div class="w3table">
+											<div class="w3table-cell">
+												<div class="btn"> > </div>
+											</div>
+										</div>
+									</div>
+									<div class="clear"> </div>
+								</div> 
+
+
+								<form method="POST" action="/">
+								<div class="container-form">
+									<div class="form-item log-in"><!-- login form-->
+										<div class="w3table agileinfo"> 
+											<div class="w3table-cell"> 
+												<p>Please fill our form to predict you data.</p><br>
+													<input id="age" type="text" name="age" placeholder="Age" required=""/>
+													<input id="fnlwgt" type="text" name="fnlwgt" placeholder="Final Weight" required=""/> 
+													<input id="education_num" name="education_num" type="text" placeholder="Education Number" required="">
+													<input id="capital_gain" name="capital_gain" type="text" placeholder="Capital Gain" required="">
+													<input id="capital_loss" name="capital_loss" type="text" placeholder="Capital Loss" required="">
+													<input id="hours_per_week" name="hours_per_week" type="text" placeholder="Hours Per Week" required="">
+
+													<div class="form-group">
+														<h5 class="w3ls-ltext">Sex</h5>
+														<select id="sex" name="sex"><option value="1">Female</option><option value="2">Male</option></select>
+													</div>
+
+													<div class="form-group">
+														<h5 class="w3ls-ltext">Race</h5>
+														<select id="race" name="race"><option value="1">White</option><option value="2">Asian-Pac-Islander</option><option value="3">Amer-Indian-Eskimo</option><option value="4">Other</option><option value="5">Black</option></select>
+													</div>
+													
+													
+											</div>
+										</div>
+									</div>
+
+									
+									<div class="form-item sign-up"><!-- sign-up form-->
+										<div class="w3table w3-agileits">
+											<div class="w3table-cell">   
+
+													
+													<div class="form-group">
+														<h5 class="w3ls-ltext">Workclass</h5>
+														<select id="workclass" name="workclass"><option value="1">Private</option><option value="2">Self-emp-not-inc</option><option value="3">Federal-gov</option><option value="4">Local-gov</option><option value="5">State-gov</option><option value="6">Without-pay</option><option value="7">Never-worked</option></select>
+													</div>
+													<div class="form-group">
+														<h5 class="w3ls-ltext">Education</h5>
+														<select id="education" name="education"><option value="1">Bachelors</option><option value="2">Some-college</option><option value="3">11th</option><option value="4">HS-grad</option><option value="5">Prof-school</option><option value="6">Assoc-acdm</option><option value="7">Assoc-avoc</option><option value="8">9th</option><option value="8">7th-8th</option><option value="9">12th</option><option value="10">Masters</option><option value="11">1st-4th</option><option value="12">10th</option><option value="13">Doctorate</option><option value="14">5th-6th</option><option value="15">Preschool</option></select>
+													</div>
+
+													<div class="form-group">
+														<h5 class="w3ls-ltext">Marital Status</h5>
+														<select id="marital_status" name="marital_status"><option value="1">Married-civ-spouse</option><option value="2">Divorced</option><option value="3">Never-married</option><option value="4">Separated</option><option value="5">Widowed</option><option value="6">Married-spouse-absent</option><option value="7">Married-AF-spouse</option></select>
+													</div>
+
+													<div class="form-group">
+														<h5 class="w3ls-ltext">Occupation</h5>
+															<select id="occupation" name="occupation"><option value="1">Tech-support</option><option value="2">Craft-repair</option><option value="3">Other-service</option><option value="4">Sales</option><option value="5">Exec-managerial</option><option value="6">Prof-specialty</option><option value="7">Machine-op-inspct</option><option value="8">Adm-clerical</option><option value="9">Farming-fishing</option><option value="10">Transport-moving</option><option value="11">Priv-house-serv</option><option value="12">Protective-serv</option><option value="13">armed-Forces</option></select>
+													</div>
+
+													<div class="form-group">
+														<h5 class="w3ls-ltext">Relationship</h5>
+															<select id="relationship" name="relationship"><option value="1">Wife</option><option value="2">Own-child</option><option value="3">Husband</option><option value="4">Not-in-familty</option><option value="5">Other-relative</option><option value="6">Unmarried</option></select>
+													</div>
+													
+													<div class="form-group">
+														<h5 class="w3ls-ltext">Native Country</h5>
+														<select id="native_country" name="native_country"><option value="1">United-States</option><option value="2">Cambodia</option><option value="3">England</option><option value="4">Puerto-Rico</option><option value="5">Canada</option><option value="6">Germany</option><option value="7">Outlying-US(Guam-USVI-etc)</option><option value="8">India</option><option value="9">Japan</option><option value="10">Greece</option><option value="11">South</option><option value="12">China</option><option value="13">Cuba</option><option value="14">Iran</option><option value="15">Honduras</option><option value="16">Philippines</option><option value="17">Italy</option><option value="18">Poland</option><option value="19">Jamaica</option><option value="20">Vietnam</option><option value="21">Mexico</option><option value="22">Portugal</option><option value="23">Ireland</option><option value="24">France</option><option value="25">Dominican-Republic</option><option value="26">Laos</option><option value="27">Ecuador</option><option value="28">Taiwan</option><option value="29">Haiti</option><option value="30">Columbia</option><option value="31">Hungary</option><option value="32">Guatemala</option><option value="33">Nicaragua</option><option value="34">Scotland</option><option value="35">Thailand</option><option value="36">Yugoslavia</option><option value="37">El-Salvador</option><option value="38">Trinadad&amp;Tobago</option><option value="39">Peru</option><option value="40">Hong</option><option value="41">Holand-Netherlands</option></select>
+													</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<br><br>
+								<hr>
+								<div class="form-group">
+										<input type="submit" value="Submit" class="btn">
+								</div>
+							</form>
+							</div> 
+						</div>	
+					</div>   
+					<!-- //main -->
+				</div>
 			</div>
-		</form>
-	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</body>
+			<script type="text/javascript"  src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+			<script type="text/javascript"  src="{{ url_for('static', filename='js/charming.min.js') }}"></script>
+			<script type="text/javascript"  src="{{ url_for('static', filename='js/anime.min.js') }}"></script>
+			<script type="text/javascript"  src="{{ url_for('static', filename='js/demo4.js') }}"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+				<script>
+		$(".info-w3lsitem .btn").click(function() {
+			  $(".main-agileinfo").toggleClass("log-in");
+			});
+			$(".container-form .btn").click(function() {
+			  $(".main-agileinfo").addClass("active");
+		});
+	</script>
+	<!-- //js --> 
+		</main>
+	</body>
 </html>
