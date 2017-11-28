@@ -1,56 +1,58 @@
 from flask import Flask, render_template, redirect, request, flash
 from wtforms import Form, IntegerField, StringField, SelectField, validators
 from wtforms.validators import DataRequired
+import numpy as np
+from sklearn.externals import joblib
 import sys
 
 app = Flask(__name__)
 # form-logic
 
-workclass_choices = [('1', 'Private'), ('2', 'Self-emp-not-inc'), ('3', 'Federal-gov'),
-					 ('4', 'Local-gov'), ('5', 'State-gov'), ('6', 'Without-pay'),
-					 ('7', 'Never-worked')
+workclass_choices = [(3, 'Private'), (5, 'Self-emp-not-inc'), (0, 'Federal-gov'),
+					 (1, 'Local-gov'), (6, 'State-gov'), (7, 'Without-pay'),
+					 (2, 'Never-worked')
 					]
 
-education_choices = [('1', 'Bachelors'), ('2', 'Some-college'), ('3', '11th'),
-					 ('4', 'HS-grad'), ('5', 'Prof-school'), ('6', 'Assoc-acdm'),
-					 ('7', 'Assoc-avoc'), ('8', '9th'), ('8', '7th-8th'), 
-					 ('9', '12th'), ('10', 'Masters'), ('11', '1st-4th'),
-					 ('12', '10th'), ('13', 'Doctorate'), ('14', '5th-6th'),
-					 ('15', 'Preschool')
+education_choices = [(9, 'Bachelors'), (15, 'Some-college'), (1, '11th'),
+					 (11, 'HS-grad'), (14, 'Prof-school'), (7, 'Assoc-acdm'),
+					 (8, 'Assoc-avoc'), (6, '9th'), (5, '7th-8th'), 
+					 (2, '12th'), (12, 'Masters'), (3, '1st-4th'),
+					 (0, '10th'), (10, 'Doctorate'), (4, '5th-6th'),
+					 (13, 'Preschool')
 					]
 
-marital_choices = [('1', 'Married-civ-spouse'), ('2', 'Divorced'), ('3', 'Never-married'),
-					 ('4', 'Separated'), ('5', 'Widowed'), ('6', 'Married-spouse-absent'),
-					 ('7', 'Married-AF-spouse')
+marital_choices = [(2, 'Married-civ-spouse'), (0, 'Divorced'), (4, 'Never-married'),
+					 (5, 'Separated'), (6, 'Widowed'), (3, 'Married-spouse-absent'),
+					 (1, 'Married-AF-spouse')
 					]
 
-occupation_choices = [('1', 'Tech-support'), ('2', 'Craft-repair'), ('3', 'Other-service'),
-					 ('4', 'Sales'), ('5', 'Exec-managerial'), ('6', 'Prof-specialty'),
-					 ('7', 'Machine-op-inspct'), ('8', 'Adm-clerical'), ('9', 'Farming-fishing'),
-					 ('10', 'Transport-moving'), ('11', 'Priv-house-serv'), ('12', 'Protective-serv'),
-					 ('13', 'armed-Forces')
+occupation_choices = [(13, 'Tech-support'), (3, 'Craft-repair'), (8, 'Other-service'),
+					 (12, 'Sales'), (4, 'Exec-managerial'), (10, 'Prof-specialty'), (6, 'Handlers-cleaners'),
+					 (7, 'Machine-op-inspct'), (1, 'Adm-clerical'), (5, 'Farming-fishing'),
+					 (14, 'Transport-moving'), (9, 'Priv-house-serv'), (11, 'Protective-serv'),
+					 (2, 'armed-Forces')
 					]
 
-relationship_choices = [('1', 'Wife'), ('2', 'Own-child'), ('3', 'Husband'),
-					 ('4', 'Not-in-familty'), ('5', 'Other-relative'), ('6', 'Unmarried')
+relationship_choices = [(5, 'Wife'), (3, 'Own-child'), (0, 'Husband'),
+					 (1, 'Not-in-familty'), (2, 'Other-relative'), (4, 'Unmarried')
 					]
 
-race_choices = [('1', 'White'), ('2', 'Asian-Pac-Islander'), ('3', 'Amer-Indian-Eskimo'),
-					 ('4', 'Other'), ('5', 'Black')
+race_choices = [(4, 'White'), (1, 'Asian-Pac-Islander'), (0, 'Amer-Indian-Eskimo'),
+					 (3, 'Other'), (2, 'Black')
 					]
 
-sex_choices = [('1', 'Female'), ('2', 'Male')]
+sex_choices = [(0, 'Female'), (1, 'Male')]
 
-native_country_choices = [('1', 'United-States'), ('2', 'Cambodia'), ('3', 'England'),
-					 ('4', 'Puerto-Rico'), ('5', 'Canada'), ('6', 'Germany'),
-					 ('7', 'Outlying-US(Guam-USVI-etc)'), ('8', 'India'), ('9', 'Japan'),
-					 ('10', 'Greece'), ('11', 'South'), ('12', 'China'),
-					 ('13', 'Cuba'), ('14', 'Iran'), ('15', 'Honduras'), ('16', 'Philippines'), ('17', 'Italy'),
-					 ('18', 'Poland'), ('19', 'Jamaica'), ('20', 'Vietnam'), ('21', 'Mexico'), ('22', 'Portugal'),
-					 ('23', 'Ireland'), ('24', 'France'), ('25', 'Dominican-Republic'), ('26', 'Laos'), ('27', 'Ecuador'),
-					 ('28', 'Taiwan'), ('29', 'Haiti'), ('30', 'Columbia'), ('31', 'Hungary'), ('32', 'Guatemala'),
-					 ('33', 'Nicaragua'), ('34', 'Scotland'), ('35', 'Thailand'), ('36', 'Yugoslavia'), ('37', 'El-Salvador'),
-					 ('38', 'Trinadad&Tobago'), ('39', 'Peru'), ('40', 'Hong'), ('41', 'Holand-Netherlands') 
+native_country_choices = [(38, 'United-States'), (0, 'Cambodia'), (8, 'England'),
+					 (32, 'Puerto-Rico'), (1, 'Canada'), (10, 'Germany'),
+					 (27, 'Outlying-US(Guam-USVI-etc)'), (18, 'India'), (23, 'Japan'),
+					 (11, 'Greece'), (34, 'South'), (2, 'China'),
+					 (4, 'Cuba'), (19, 'Iran'), (15, 'Honduras'), (29, 'Philippines'), (21, 'Italy'),
+					 (30, 'Poland'), (22, 'Jamaica'), (39, 'Vietnam'), (25, 'Mexico'), (31, 'Portugal'),
+					 (20, 'Ireland'), (9, 'France'), (5, 'Dominican-Republic'), (24, 'Laos'), (6, 'Ecuador'),
+					 (35, 'Taiwan'), (13, 'Haiti'), (3, 'Columbia'), (17, 'Hungary'), (12, 'Guatemala'),
+					 (26, 'Nicaragua'), (33, 'Scotland'), (36, 'Thailand'), (40, 'Yugoslavia'), (7, 'El-Salvador'),
+					 (37, 'Trinadad&Tobago'), (28, 'Peru'), (16, 'Hong'), (14, 'Holand-Netherlands') 
 					]
 
 class InputForm(Form):
@@ -75,28 +77,40 @@ def index():
 	form = InputForm(request.form)
 	if (request.method == 'POST'):
 		
-		age_value = form.age.data
-		fnlwgt_value = form.fnlwgt.data
-		education_num_value = form.education_num.data
-		capital_gain_value = form.capital_gain.data
-		capital_loss_value = form.capital_loss.data
-		hours_per_week_value = form.hours_per_week.data
+		age_value = int(form.age.data)
+		fnlwgt_value = int(form.fnlwgt.data)
+		education_num_value = int(form.education_num.data)
+		capital_gain_value = int(form.capital_gain.data)
+		capital_loss_value = int(form.capital_loss.data)
+		hours_per_week_value = int(form.hours_per_week.data)
 
-		workclass_value = dict(workclass_choices).get(form.workclass.data)
-		education_value = dict(education_choices).get(form.education.data)
-		marital_status_value = dict(marital_choices).get(form.marital_status.data)
-		occupation_value = dict(occupation_choices).get(form.occupation.data)
-		relationship_value = dict(relationship_choices).get(form.relationship.data)
-		race_value = dict(race_choices).get(form.race.data)
-		sex_value = dict(sex_choices).get(form.sex.data)
-		native_country_value = dict(native_country_choices).get(form.native_country.data)
+		workclass_value = workclass_choices[int(form.workclass.data)-1][0]
+		education_value = education_choices[int(form.education.data)-1][0]
+		marital_status_value = marital_choices[int(form.marital_status.data)-1][0]
+		occupation_value = occupation_choices[int(form.occupation.data)-1][0]
+		relationship_value = relationship_choices[int(form.relationship.data)-1][0]
+		race_value = race_choices[int(form.race.data)-1][0]
+		sex_value = sex_choices[int(form.sex.data)-1][0]
+		native_country_value = native_country_choices[int(form.native_country.data)-1][0]
 
-		value = [age_value, workclass_value,fnlwgt_value, education_value,
-				education_num_value, marital_status_value, occupation_value,
+		model = joblib.load('model_income.pkl')
+		value = [age_value, workclass_value, education_value,
+				marital_status_value, occupation_value,
 				relationship_value, race_value, sex_value, capital_gain_value,
-				capital_loss_value, hours_per_week_value, native_country_value
+				capital_loss_value, native_country_value
 				]
-		flash(value, 'success')
+		print('value')
+		value = np.array(value).reshape(1,-1)   
+
+		print(value)
+		# output income
+		result = model.predict(value)
+		
+		if (result[0] == 0) :
+			flash('<= 50K')
+		else:
+			flash('> 50K')
+
 		return redirect('/')
 	return render_template('index.html', form=form)
 
